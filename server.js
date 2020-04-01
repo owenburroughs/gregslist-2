@@ -24,6 +24,12 @@ app.use('/update', update)
 //create public assets directory
 app.use(express.static('public'));
 
+app.get('/clearGames', function(req,res){
+    res.send(games);
+    games=[];
+    res.send(games);
+})
+
 //serve index page 
 app.use('/', function(req,res){
     fs.readFile('index.html', function(err, data){

@@ -28,7 +28,11 @@ router.post('/', function(req, res){
                 res.send('noGame');
             }else{
                 if(!getPlayerById(req.sessionID, game)){
-                    game.players.push({id: req.sessionID, score:0});
+                    game.players.push({
+                        id: req.sessionID,
+                        score:0, 
+                        ready:false, 
+                        voted:false});
                 }
                 res.send('success');
             }
@@ -69,6 +73,10 @@ router.post('/', function(req, res){
         case 'getPrompt':
             let generatedPrompt = randomWord();
             getPlayerById(req.sessionID, getGameById(data.id)).prompt= generatedPrompt;
+
+            //reset variables for future rounds
+            getPlayerById(req.sessionID, getGameById(data.id)).ready= false;
+            getPlayerById(req.sessionID, getGameById(data.id)).voted= false;
             res.send({prompt: generatedPrompt})
         break;
 
@@ -86,12 +94,13 @@ router.post('/', function(req, res){
 
         case 'getResponses':
             let responses=[];
-            let ready;
+            let ready=true;
             let activePlayers=getGameById(data.id).players;
             for(let i=0; i< activePlayers.length; i++){
                 //check player is ready
                 if(!activePlayers[i].ready){
                     ready = false;
+                    console.log('not ready');
                 } else{
                     //add player's responses to game's response array
                     responses.push({
@@ -100,10 +109,8 @@ router.post('/', function(req, res){
                         'title': activePlayers[i].title,
                         'body': activePlayers[i].body
                      })
-                     ready=true;
-
                  }
-                }
+            }
             res.send({
                 'ready':ready,
                 'responses':responses
@@ -117,7 +124,6 @@ router.post('/', function(req, res){
 
         case 'vote':
             let tempStage='results'
-            console.log(data.id);
             getPlayerById(data.vote, getGameById(data.id)).score++;
             getPlayerById(req.sessionID, getGameById(data.id)).voted = true;
             for(let i=0; i<getGameById(data.id).players.length; i++){

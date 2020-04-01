@@ -50,17 +50,6 @@ function startTheFuckingGame(){
     })
 }
 
-function nextRound(){
-    $.post('/update', {request:"nextRound", id:gameId}, function(data, status){
-        if (status=='success'){
-            stage="write";
-            counter=0;
-            responses=[];
-            responseCounter=0;
-            $("#hostResults").hide();
-        }
-    })
-}
 
 ///// PLAYER FUNCTIONALITY ///////
 
@@ -142,8 +131,10 @@ function playerGameLoop(){
                         $.post('/update', {request: 'getResponses', id:gameId}, function(data, status){
                             if(status=='success'){
                                 for(let i=0; i<data.responses.length; i++){
-                                    $('#ballot').append('<br><button onclick=\"vote(\''+data.responses[i].id+'\')\"><h1>'+data.responses[i].title+'</h1></button>')
-                                }
+                                    if(data.responses[i].title!=$('#title').val()){
+                                        $('#ballot').append('<br><button onclick=\"vote(\''+data.responses[i].id+'\')\"><h1>'+data.responses[i].title+'</h1></button>')
+                                    }
+                                    }
                                 stage='awaitVote'
                             }
                         })
@@ -177,6 +168,9 @@ function vote(voteId){
     $.post('/update', {request: 'vote', id: gameId, vote: voteId}, function(data, status){
         if(status=='success'){
             stage='awaitNewGame'
+            $('#title').val("");
+            $('#body').val("");
+            $('#ballot').html("");
             $('#playerVoting').hide()
             $('#playerAwaitNewGame').show()
         }
@@ -281,11 +275,24 @@ function hostGameLoop(){
             $.post('/update', {request: 'results', id: gameId}, function(data, status){
                 if(status=='success'){
                     for(let i=0; i<data.length; i++){
-                        $("#playerScores").append(data[i].name + ": " + data[i].score)
+                        $("#playerScores").append(data[i].name + ": " + data[i].score + "<br>")
                     }
                     stage='awaitNewGame'
                 }
             })
         break;
     }
+}
+
+function nextRound(){
+    $.post('/update', {request:"nextRound", id:gameId}, function(data, status){
+        if (status=='success'){
+            stage="write";
+            counter=0;
+            responses=[];
+            responseCounter=0;
+            $("#playerScores").html("");
+            $("#hostResults").hide();
+        }
+    })
 }
