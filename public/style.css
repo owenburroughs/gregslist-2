@@ -1,0 +1,61 @@
+#header{
+    height: 15%;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+.header{
+    display:inline;
+    white-space: nowrap;
+    font-size: 70;
+    font-style: italic;
+}
+#menu{
+    display: inline-block;
+    position: relative;
+}
+h1{
+    display:inline-block;
+}
+#gameid{
+    display:inline-block;
+}
+.counter{
+    width: 25%;
+    height: 25%;
+    border: 1px solid black;
+    font-size: 50;
+    position: absolute;
+    bottom: 10;
+    right: 10;
+    text-align: center;
+}
+#hostWrite{
+    font-size: 250%;
+    text-align: center;
+}
+.title{
+    font-size: 350%
+}
+input{
+    width:80%;
+    font-size:50;
+}
+#body{
+    font-size: 20;
+    height: 25%;
+    width: 80%
+}
+#prompt{
+    display:inline
+}
+#title{
+    display: inline;
+}
+#playerWrite{
+    display: inline;
+}
+#hostVoting{
+    font-size: 250%;
+    text-align: center;
+}

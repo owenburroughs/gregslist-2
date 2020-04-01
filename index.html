@@ -1,0 +1,99 @@
+<head>
+    <link href="style.css" rel="stylesheet" type="text/css" >
+    <script src="game.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <Title>GREGSLIST</Title>
+</head>
+
+
+<div id="header">
+    <img src="greg.png" height="100%" class='header'><h1 class='header'> Gregslist</h1><br>
+    <hr>
+</div>
+
+<div id="menu" visibility="visible">
+<h1 class='title'>Join Game with ID</h1><br>
+<input id="joinGameId">    <button onclick="joinGame()"><h1>Join</h1></button><br>
+<hr>
+<hr>
+<br>
+<button onClick="createGame()"><h1>Create New Game</h1></button>
+</div>
+
+<!--  //////////        HOST SHEETS         ///////////-->
+<div id="hostWaitingRoom" style="display:none; text-align:center;">
+    <h1 style="font-size: 70;">Game ID: <div id="gameId"></div></h1>
+    <br>
+    <h1>Players: <br>
+        <div id="players"></div>
+    </h1><br><br>
+    <button onclick="startTheFuckingGame()"><h1>Start Game</h1></button>
+</div>
+
+<div id="hostInstructions" style="display:none">
+    <h2><br><br>
+        <ul>
+            <li>Thank you for deciding to sell your useless shit on Gregslist!</li>
+            <li>You will be given an absolute piece of crap to sell, and you write an advertisement.</li>
+            <li>The player who sells the most shit wins.</h2></li>
+        </ul>
+        <br><h1>Get it?</h1>
+    <div id='instructionsCounter' class='counter'></div>
+</div>
+
+<div id="hostWrite" style="display:none">
+    <h1>Write your Ad! <br>
+    Time Remaining:<br>
+    <div id="writeTimer"></div></h1>
+</div>
+
+<div id="hostResponses" style="display:none">
+    <h1><div id='responsePrompt'></div></h1><br><hr>
+    <h1><div id="responseTitle"></div></h1><br>
+    <h2><div id="responseBody"></div></h2>
+<div id='responsesCounter' class='counter'></div>
+</div>
+
+<div id="hostVoting" style="display:none">
+    <h1>Pick Which Item to Buy!</h1>
+</div>
+
+<div id="hostResults" style="display:none">
+    <h1><div id="playerScores"></div></h1><br>
+    <button onclick="nextRound()"><h1>Next Round</h1></button>
+</div>
+
+<!--  //////////        PLAYER SHEETS         ///////////-->
+<div id="playerWaitingRoomStage" style="display:none">
+    <div id="nameEntry">
+    <h1>Enter your name:</h1><br>
+    <input id="enterName"><button onclick="submitName()"><h1>Submit</h1></button>
+    </div>
+    <div id="playerWaitingRoom" style="display:none">
+        <h1><div id="playerName"></div><br>
+            <div id="instructions"></div></h1>
+    </div>
+    </div>
+</div>
+
+<div id="playerWrite" style="display:none">
+<h1>Your Piece of Shit is "<div id="prompt"></div>"</h1><br>
+<hr>
+<h2>Title of Ad:</h2><input id="title"></input>
+<h2>Body:</h2>
+<textarea id="body" maxlength="350"></textarea><br>
+<h3>Tip: You can keep writing until the timer runs out. Make it good!</h3>
+</div>
+
+<div id="playerResponses" style="display:none">
+    <h1>Watch big screen for responses!</h1>
+</div>
+
+<div id="playerVoting" style="display:none">
+    <h1>Vote Now!</h1>
+    <div id="ballot"></div>
+</div>
+
+<div id="playerAwaitNewGame" style="display:none">
+    <h1>Waiting for New Game!</h1>
+</div>
